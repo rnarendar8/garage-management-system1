@@ -352,6 +352,11 @@ https://github.com/rnarendar8
 
 ---
 
+
+customers  
+<img width="1919" height="752" alt="image" src="https://github.com/user-attachments/assets/c83c5fb3-3b69-4c04-b047-ae1ca0f22e8b" />
+
+
 # ⭐ Conclusion
 
 This project demonstrates practical experience in developing a secure full-stack enterprise application using modern technologies. It showcases authentication, API development, database management, frontend-backend integration, debugging, and real-world problem-solving.
