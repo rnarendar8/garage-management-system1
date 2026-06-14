@@ -1,0 +1,48 @@
+@if (loading) {
+
+<app-loading></app-loading>
+
+} @else if (errorMessage) {
+
+<div class="error-box">
+  {{ errorMessage }}
+</div>
+
+} @else {
+
+<div class="dashboard-container">
+
+  <h2>🚗 Garage Management Dashboard</h2>
+
+  <div class="stats-grid">
+
+    <div class="stat-card customers">
+      <h3>Total Customers</h3>
+      <p>{{ totalCustomers }}</p>
+    </div>
+
+    <div class="stat-card vehicles">
+      <h3>Total Vehicles</h3>
+      <p>{{ totalVehicles }}</p>
+    </div>
+
+    <div class="stat-card requests">
+      <h3>Total Requests</h3>
+      <p>{{ totalRequests }}</p>
+    </div>
+
+    <div class="stat-card completed">
+      <h3>Completed Jobs</h3>
+      <p>{{ completedRequests }}</p>
+    </div>
+
+    <div class="stat-card revenue">
+      <h3>Total Revenue</h3>
+      <p>₹ {{ totalRevenue }}</p>
+    </div>
+
+  </div>
+
+</div>
+
+}

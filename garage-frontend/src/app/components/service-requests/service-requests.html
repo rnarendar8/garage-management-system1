@@ -1,0 +1,186 @@
+@if (loading) {
+
+<app-loading></app-loading>
+
+} @else if (errorMessage) {
+
+<div class="error-box">
+  {{ errorMessage }}
+</div>
+
+} @else {
+
+<div class="container">
+
+  <h2>Service Requests</h2>
+
+  <!-- Create Request -->
+  <div class="card">
+
+    <h3>Create New Request</h3>
+
+    <form (ngSubmit)="createRequest()" #form="ngForm">
+
+      <!-- Vehicle Select -->
+      <select
+        [(ngModel)]="newRequest.vehicleId"
+        name="vehicleId"
+        required>
+
+        <option value="">Select Vehicle</option>
+
+        <option *ngFor="let v of vehicles"
+                [value]="v.id">
+
+          {{ v.licensePlate }} - {{ v.make }}
+
+        </option>
+
+      </select>
+
+
+      <!-- Description -->
+      <input
+        type="text"
+        placeholder="Enter service description"
+        [(ngModel)]="newRequest.description"
+        name="description"
+        required>
+
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        [disabled]="form.invalid">
+
+        Create Request
+
+      </button>
+
+    </form>
+
+  </div>
+
+
+  <!-- Service Request List -->
+  <div class="card">
+
+    <h3>All Service Requests</h3>
+
+    <table>
+
+      <thead>
+
+      <tr>
+        <th>ID</th>
+        <th>Vehicle</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Estimated Cost</th>
+        <th>Actual Cost</th>
+        <th>Update Status</th>
+        <th>Delete</th>
+      </tr>
+
+      </thead>
+
+
+      <tbody>
+
+      <tr *ngFor="let r of requests">
+
+        <td>{{ r.id }}</td>
+
+        <td>
+          {{ r.vehicle?.licensePlate }}
+        </td>
+
+
+        <td>
+          {{ r.description }}
+        </td>
+
+
+        <td>
+
+            <span
+              class="badge"
+              [ngClass]="getStatusClass(r.status)">
+
+              {{ r.status }}
+
+            </span>
+
+        </td>
+
+
+        <td>
+          ₹ {{ r.estimatedCost || 0 }}
+        </td>
+
+
+        <td>
+          ₹ {{ r.actualCost || 0 }}
+        </td>
+
+
+        <!-- Status Update -->
+        <td>
+
+          <select
+            #statusSelect
+            (change)="updateStatus(r.id, statusSelect.value)">
+
+            <option value="">
+              Change
+            </option>
+
+            <option value="IN_PROGRESS">
+              In Progress
+            </option>
+
+            <option value="COMPLETED">
+              Completed
+            </option>
+
+          </select>
+
+        </td>
+
+
+        <!-- Delete -->
+        <td>
+
+          <button
+            (click)="deleteRequest(r.id)">
+
+            Delete
+
+          </button>
+
+        </td>
+
+      </tr>
+
+
+      <!-- Empty Data -->
+      <tr *ngIf="requests.length === 0">
+
+        <td colspan="8">
+
+          No service requests available.
+
+        </td>
+
+      </tr>
+
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+}

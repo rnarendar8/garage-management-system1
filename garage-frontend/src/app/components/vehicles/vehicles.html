@@ -1,0 +1,105 @@
+@if (loading) {
+
+<app-loading></app-loading>
+
+} @else {
+
+<!-- Your complete existing vehicle page code -->
+
+}
+@if (errorMessage) {
+
+<div class="error-box">
+  {{ errorMessage }}
+</div>
+
+} @else {
+
+<!-- Your existing vehicles page content -->
+
+}
+
+<h2>🚗 Add Vehicle</h2>
+
+<form (ngSubmit)="addVehicle()" #vehicleForm="ngForm">
+
+  <select [(ngModel)]="selectedCustomerId"
+          name="customer"
+          required>
+    <option [ngValue]="null">Select Customer</option>
+    <option *ngFor="let c of customers"
+            [ngValue]="c.id">
+      {{ c.firstName }} {{ c.lastName }}
+    </option>
+  </select>
+
+  <input type="text"
+         placeholder="License Plate"
+         [(ngModel)]="newVehicle.licensePlate"
+         name="licensePlate"
+         required />
+
+  <input type="text"
+         placeholder="Make"
+         [(ngModel)]="newVehicle.make"
+         name="make"
+         required />
+
+  <input type="text"
+         placeholder="Model"
+         [(ngModel)]="newVehicle.model"
+         name="model"
+         required />
+
+  <input type="number"
+         placeholder="Year"
+         [(ngModel)]="newVehicle.year"
+         name="year"
+         required />
+
+  <input type="text"
+         placeholder="VIN Number"
+         [(ngModel)]="newVehicle.vinNumber"
+         name="vinNumber" />
+
+  <button type="submit" [disabled]="vehicleForm.invalid">
+    Add Vehicle
+  </button>
+</form>
+
+<hr>
+
+<h2>🚘 Vehicle List</h2>
+
+<table border="1" width="100%" cellpadding="8">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>License</th>
+    <th>Make</th>
+    <th>Model</th>
+    <th>Year</th>
+    <th>Customer</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let v of vehicles">
+    <td>{{ v.id }}</td>
+    <td>{{ v.licensePlate }}</td>
+    <td>{{ v.make }}</td>
+    <td>{{ v.model }}</td>
+    <td>{{ v.year }}</td>
+    <td>
+      {{ v.customer?.firstName }}
+      {{ v.customer?.lastName }}
+    </td>
+    <td>
+      <button (click)="deleteVehicle(v.id)">
+        Delete
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>

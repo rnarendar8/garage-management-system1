@@ -1,0 +1,31 @@
+<div class="login-container">
+
+  <h2>Garage Management Login</h2>
+
+  <p class="error">{{ errorMessage }}</p>
+
+  <form (ngSubmit)="login()">
+
+    <input
+      type="text"
+      placeholder="Username"
+      [(ngModel)]="username"
+      name="username"
+      required
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+      name="password"
+      required
+    />
+
+    <button type="submit">
+      Login
+    </button>
+
+  </form>
+
+</div>
